@@ -1,0 +1,96 @@
+<form action="/addcomment/{{book.title}}" method="post" class="myForm">
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-12">
+                <h2>Σχόλια</h2>
+            </div>
+        </div>
+        <div class="table-responsive-sm">
+            <table class="table table-hover">
+                <thead>
+                    <fieldset class="border p-2 mb-3">
+                    <legend class="w-auto">Προσθέστε το σχόλιό σας</legend>
+                    <div class="row mb-3">
+                        <div class="col-md-2 col-sm-12 justify-content-end d-flex">
+                            <label for="newBookTitle" class="col-form-label">Τίτλος</label>
+                        </div>
+                        <div class="col-md-10 col-sm-10">
+                            <input type="text" class="form-control" id="newBookTitle" value="{{book.title}}" name="newBookTitle" readonly>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-2 col-sm-12 justify-content-end d-flex">
+                            <label for="newBookAuthor" class="col-form-label">Συγγραφέας</label>
+                        </div>
+                        <div class="col-md-10 col-sm-10 position-relative">
+                            <input type="text" class="form-control" id="newBookAuthor" value="{{book.author}}" name="newBookAuthor" readonly>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-2 col-sm-12 justify-content-end d-flex">
+                            <label for="newComment" class="col-form-label">Σχόλιο</label>
+                        </div>
+                        <div class="col-md-10 col-sm-10 position-relative">
+                            <input type="text" class="form-control {{#if message.newComment}} is-invalid {{/if}}" id="newComment" value="{{myComment.comment}}" name="newComment" placeholder="Σχόλιο" required>
+                            <div class="valid-feedback"> Μια χαρά! </div>
+                            <div class="invalid-feedback">{{message.newComment.msg}} </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <div class="row mb-3">
+                    <div class="col">
+                        <button type="submit" class="btn btn-primary mb-3">Υποβολή</button>
+                        
+                        <a class="btn btn-danger mb-3" href="/deletecomment/{{book.title}}">Διαγραφή</a>
+                    
+                    </div>
+                    
+                </div>
+                </thead>
+            </table>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-12">
+                <h2>Άλλοι είπαν... {{#if comments}} - ({{comments.length}}) {{/if}}</h2>
+                {{#if comments}}
+            </div>
+        </div>
+        <div class="table-responsive-sm">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Μέλος</th>
+                        <th>Σχόλιο</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each comments}}
+                        <tr>
+                            <td>{{this.UserName}}</td>
+                            <td>{{this.comment}}</td>
+                        </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+        {{/if}}
+        {{#unless comments}}
+            <div class="row mt-5">
+                <legend class="w-auto">Δεν υπάρχει κανένα σχόλιο για αυτό το βιβλίο</legend>
+            </div>
+            <div class="row mt-2">
+            
+            </div>
+        {{/unless}}
+        {{#if error}}
+            <div class="row mt-5">
+                <div class="col-6 offset-3">
+                    <div class="alert alert-primary" role="alert">
+                        {{error}}
+                    </div>
+                </div>
+            </div>
+        {{/if}}
+    </div>
+</form>

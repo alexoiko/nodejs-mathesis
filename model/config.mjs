@@ -16,7 +16,7 @@ import { Sequelize } from 'sequelize';
 //         }
 //     });
 
-const sequalizer = new Sequelize(process.env.DATABASE_URL,{
+const sequelizer = new Sequelize(process.env.DATABASE_URL,{
         dialect: 'postgres',
         dialectOptions:{
 

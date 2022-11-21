@@ -1,5 +1,5 @@
 import { DataTypes } from 'sequelize';
-import sequelizer from './config.mjs';
+import sequelize from './config.mjs';
 
 // DEFINE MODEL
 const Book = sequelize.define(
